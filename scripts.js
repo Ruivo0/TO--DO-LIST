@@ -14,7 +14,7 @@ function adicionarNovaTarefa() {
 }
 function mostrarTarefas() {
     let novaLi = ''
-    minhalistaDeItens.forEach((item, posicao)  => {
+    minhalistaDeItens.forEach((item, posicao) => {
         novaLi = novaLi + `
          
          <li class="task ${item.concluida && "done"}">
@@ -26,26 +26,26 @@ function mostrarTarefas() {
          `
     })
 
-listaCompleta.innerHTML = novaLi
- localStorage.setItem('lista',JSON.stringify(minhalistaDeItens))
+    listaCompleta.innerHTML = novaLi
+    localStorage.setItem('lista', JSON.stringify(minhalistaDeItens))
 }
 
-function concluirTarefa(posicao){
-     minhalistaDeItens[posicao].concluida = !minhalistaDeItens[posicao].concluida
-     mostrarTarefas()
+function concluirTarefa(posicao) {
+    minhalistaDeItens[posicao].concluida = !minhalistaDeItens[posicao].concluida
+    mostrarTarefas()
 }
 
-function recarregarTarefas(){
+function recarregarTarefas() {
     const tarefasDoLocalStorage = localStorage.getItem('lista')
-    
-    if(tarefasDoLocalStorage){
+
+    if (tarefasDoLocalStorage) {
         minhalistaDeItens = JSON.parse(tarefasDoLocalStorage)
-    }   
+    }
     mostrarTarefas()
 }
 
 
-function deletarItem(posicao){
+function deletarItem(posicao) {
 
     minhalistaDeItens.splice(posicao, 1)
     mostrarTarefas()
@@ -56,4 +56,7 @@ function deletarItem(posicao){
 
 
 
-button.addEventListener('click', adicionarNovaTarefa)
+document.addEventListener('DOMContentLoaded', function() {
+    recarregarTarefas();
+    button.addEventListener('click', adicionarNovaTarefa);
+});
